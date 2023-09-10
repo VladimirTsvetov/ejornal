@@ -10,21 +10,30 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "programs")
+@Table(name = "students")
 @Data
-public class Program {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Group group;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "address")
+    private String address;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -35,3 +44,4 @@ public class Program {
     private LocalDateTime updatedAt;
 
 }
+
