@@ -8,23 +8,24 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "programs")
+@Table(name = "schedules")
 @Data
-public class Program {
+public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Group group;
+    @Column(name = "work_day")
+    private String work_day;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "work_time")
+    Time work_time;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -33,5 +34,6 @@ public class Program {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
 
 }

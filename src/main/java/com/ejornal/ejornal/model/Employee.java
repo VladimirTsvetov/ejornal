@@ -9,22 +9,40 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 @Entity
-@Table(name = "programs")
+@Table(name = "employees")
 @Data
-public class Program {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Group group;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "patronymic")
+    private String patronymic;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "title")
     private String title;
+
+    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
+    private List<Group> groups;
 
     @Column(name = "created_at")
     @CreationTimestamp
